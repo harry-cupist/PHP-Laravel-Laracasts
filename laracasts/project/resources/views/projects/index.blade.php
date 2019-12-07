@@ -6,7 +6,7 @@
 <body>
     <h1>projects</h1>
     @foreach ($projects as $project)
-        <li>{{ $project->title }}</li>
+        <li>{{ $project->title }} - {{ $project->description }}</li>
     @endforeach
 </body>
 </html>
