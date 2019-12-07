@@ -34,7 +34,7 @@ Route::get('/projects/{project}', 'ProjectsController@show');
 Route::post('/projects', 'ProjectsController@store');
 Route::get('/projects/{project}/edit', 'ProjectsController@edit');
 Route::patch('projects/{project}', 'ProjectsController@update');
-Route::delete('projects/{project', 'ProjectsController@destroy');
+Route::delete('projects/{project}', 'ProjectsController@destroy');
 
 // shortcut - resource: thing that we are manipulating
 // this create all routes based on above standard(RESTful) conventions
