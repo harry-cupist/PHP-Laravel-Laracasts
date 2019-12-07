@@ -27,15 +27,8 @@ Route::get('/', function () {
  */
 
 
-
-Route::get('/projects', 'ProjectsController@index');
-Route::get('/projects/create', 'ProjectsController@create');
-Route::get('/projects/{project}', 'ProjectsController@show');
-Route::post('/projects', 'ProjectsController@store');
-Route::get('/projects/{project}/edit', 'ProjectsController@edit');
-Route::patch('projects/{project}', 'ProjectsController@update');
-Route::delete('projects/{project}', 'ProjectsController@destroy');
-
-// shortcut - resource: thing that we are manipulating
-// this create all routes based on above standard(RESTful) conventions
 Route::resource('projects','ProjectsController');
+
+//Route::patch('/tasks', 'ProjectTasksController@store'); // hidden input으로 어떤 프로젝트에 대한 것인지를 함께 넘겨줘야함.
+Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
+Route::patch('/tasks/{task}', 'ProjectTasksController@update');
