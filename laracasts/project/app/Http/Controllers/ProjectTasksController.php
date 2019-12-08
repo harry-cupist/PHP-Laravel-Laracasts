@@ -10,8 +10,11 @@ class ProjectTasksController extends Controller
 {
     public function store(Project $project)
     {
-        $attributes = request()->validate(['description' => 'required']);
 
+//        $project->tasks()->create(request);
+
+
+        $attributes = request()->validate(['description' => 'required']);
         $project->AddTask($attributes);
 
         return back();
@@ -19,10 +22,22 @@ class ProjectTasksController extends Controller
 
     public function update(Task $task)
     {
-        dd(request()->all());
-        $task->update([
-            'completed' => request()->has('completed')
-        ]);
+        // option 1
+        if (request()->has('completed')) {
+            $task->complete();
+        } else {
+            $task->incomplete();
+        }
+
+        // option 2
+        request()->has('completed') ? $task->complete() : $task->incomplete();
+
+        // option 3
+        $method = request()->has('completed') ? 'complete' : 'incomplete';
+        $task->$method();
+
+
+//        $task->complete(request()->has('completed'));
 
         return back();
     }
