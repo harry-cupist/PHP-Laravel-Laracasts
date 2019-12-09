@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+use App\Services\Twitter;
+
+Route::get('/', function(Twitter $twitter) {
+
     return view('welcome');
 });
 
@@ -26,10 +29,12 @@ Route::get('/', function () {
     DELETE /projects/1 (destroy)
  */
 
-
 Route::resource('projects','ProjectsController');
 
-//Route::patch('/tasks', 'ProjectTasksController@store'); // hidden input으로 어떤 프로젝트에 대한 것인지를 함께 넘겨줘야함.
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
 Route::post('/completed-tasks/{task}', 'CompletedTasksController@store');
 Route::delete('/completed-tasks/{task}', 'CompletedTasksController@destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

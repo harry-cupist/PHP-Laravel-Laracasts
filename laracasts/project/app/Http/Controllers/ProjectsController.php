@@ -4,19 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Project;
 
-use Illuminate\Http\Request;
-
 class ProjectsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $projects = Project::all();
+        // auth()->id(); // 4
+        // auth()->user(); // user
+        // auth()->check(); // boolean
+        // auth()->guest(); // guest user
+
+        // select * from projects where owner_id = 4
+        $projects = Project::where('owner_id', auth()->id())->get();
 
         return view('projects.index', compact('projects'));
-
     }
+
     public function show(Project $project)
     {
+
         return view('projects.show', compact('project'));
     }
 
@@ -28,19 +38,17 @@ class ProjectsController extends Controller
     public function store()
     {
         $attribute = request()->validate([
-//            'title' => 'required',
-            'title' => ['required', 'min:3'], // min string length: 3
+            'title' => ['required', 'min:3'],
             'description' => ['required','min:3'],
-//            'password' => ['required', 'confirmed'],
         ]);
 
-        // validated attribute(array) is returned. => request(['title', 'description']) is no needed.
-        // change to $validated
+        $attribute['owner_id'] = auth()->id();
 
         Project::create($attribute);
 
         return redirect('/projects');
     }
+
     public function edit(Project $project)
     {
 
