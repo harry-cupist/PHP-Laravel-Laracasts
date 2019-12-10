@@ -60,3 +60,5 @@ $laracasts->hire(new Person('Ron Wizlie'));
 
 var_dump($staff);
 var_dump($laracasts->getStaffMembers());
+
+
