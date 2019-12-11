@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Task;
 
 class CompletedTasksController extends Controller
@@ -21,4 +20,3 @@ class CompletedTasksController extends Controller
         return back();
     }
 }
-

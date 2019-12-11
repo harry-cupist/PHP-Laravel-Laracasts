@@ -25,4 +25,3 @@ class Project extends Model
 }
 
 // $project -> tasks;
-

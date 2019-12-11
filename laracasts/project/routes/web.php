@@ -13,8 +13,7 @@
 
 use App\Services\Twitter;
 
-Route::get('/', function(Twitter $twitter) {
-
+Route::get('/', function (Twitter $twitter) {
     return view('welcome');
 });
 
@@ -29,7 +28,7 @@ Route::get('/', function(Twitter $twitter) {
     DELETE /projects/1 (destroy)
  */
 
-Route::resource('projects','ProjectsController');
+Route::resource('projects', 'ProjectsController');
 
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
 Route::post('/completed-tasks/{task}', 'CompletedTasksController@store');
