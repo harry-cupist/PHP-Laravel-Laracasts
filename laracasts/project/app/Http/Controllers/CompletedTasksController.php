@@ -10,6 +10,9 @@ class CompletedTasksController extends Controller
     {
         $task->complete();
 
+
+
+
         return back();
     }
 

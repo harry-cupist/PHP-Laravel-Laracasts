@@ -113,5 +113,120 @@ class AreaCalculator {
 interface Shape {
     public function area();
 }
+
+// Sqaure.php
+<?php namespace Acme;
+
+class Square implements Shape {
+    public $width;
+    public $height;
+
+    function __construct($height, $width)
+    {
+        $this->height = $height;
+        $this->width = $width;
+    }
+
+    public function area()
+    {
+        return $this->width * $this->height;
+    }
+}
+// Circle.php
+<?php namespace Acme;
+
+class Circle implements Shape {
+    public $radius;
+
+    function __construct($radius)
+    {
+        $this->radius = $radius;
+    }
+
+    public function area()
+    {
+        return $this->radius * $this->radius * pi();
+    }
+}
 ```
+
+ `AreaCalculator@calculate`  메소드는 이제 면적을 계산한 값을 파라미터로 받아 `$area` 에 저장만 하면 됨. 만약에 삼각형에 대하여 추가적인 계산이 필요하더라도 아래 코드는 수정할 필요가 없으며, 삼각형 클래스만 만들어 `area` 메소드를 implement하여 면적 계산만 하면 됨.
+
+```php
+<?php namespace Acme;
+
+class AreaCalculator {
+
+    public function calculate($shapes)
+    {
+        foreach ($shapes as $shape)
+        {
+            $area[] = $shape->area();
+        }
+
+        return array_sum($area);
+    }
+}
+```
+
+
+
+제품을 사고 체크아웃 하는 프로세스 로직을 갖고 있는 `Checkout` 클래스를 정의해보자. 
+
+-  `begin` : 영수증을 받아 시작을 함. 그리고 payment를 accept 하는 `acceptCash` 를 호출함
+- `acceptCash` : 현금을 받음
+
+```php
+class Checkout{
+    public function begin(Receipt $receipt)
+    {
+        $this->acceptCash($receipt);
+    }
+
+    public function acceptcash($receipt)
+    {
+        // accept the cash
+    }
+}
+```
+
+
+
+만약에 현금이 아니라 신용카드, 카카오 페이로 계산을 하기 원하는 경우는 어떻게 해야할까? 기존의 코드는 현금을 받아 계산하는 경우만을 고려하여 디자인 되어있음. 이러한 경우는 Open Closed Principle을 고려하지 않은 경우임. Open Closed Principle을 적용할 경우 코드는 다음과 같음.
+
+```php
+interface PaymentMethodInterface {
+    public function acceptPayment($receipt);
+}
+
+class CashPaymentMethod implements PaymentMethodInterface {
+    public function acceptPayment($receipt)
+    {
+    }
+}
+
+class Checkout{
+    public function begin(Receipt $receipt, PaymentMethodInterface $payment)
+    {
+        $payment->acceptPayment();
+    }
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
