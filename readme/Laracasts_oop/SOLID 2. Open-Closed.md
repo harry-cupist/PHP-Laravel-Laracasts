@@ -6,6 +6,8 @@
 
 - closed for modification: **Goal** (very difficult to follow perfectly). something you should strive for its goal. **Change behavior without modifying original source code** .
 
+확장에는 개방되어야하며 변경에는 폐쇄되어야한다. 기존의 코드를 변경하지 않으면서 기능을 추가할 수 있도록 설계되어야 함.
+
 
 
 #### modify behavior by doing it from extension
@@ -54,7 +56,7 @@ class AreaCalculator {
 
 
 
-그리고, 보스가 원에 대해서도 준비해달라고 요청을 하였고, 원의 면적도 고려해서 계산할 수 있는 로직을 구현해달라고 추가 요청을 함. 그러나 현재 `AreaCalculator`  클래스는 사각형만을 고려해서 구현되어있으며 원에 대해서는 적용이 불가능한 상태임. 따라서 클래스를 전면적으로 수정해야함. 이는 Open-Closed Principle을 준수하지 않는 상태임!!
+이후, 보스가 원에 대해서도 준비해달라고 요청을 하였고, 원의 면적도 고려해서 계산할 수 있는 로직을 구현해달라고 추가 요청을 함. 그러나 현재 `AreaCalculator`  클래스는 사각형만을 고려해서 구현되어있으며 원에 대해서는 적용이 불가능한 상태임. 따라서 클래스를 전면적으로 수정해야함. 이는 Open-Closed Principle을 위반하는 것.
 
 ```php
 <?php namespace Acme;
@@ -102,6 +104,8 @@ class AreaCalculator {
 또 다시, 삼각형 클래스를 추가하여 면적 계산 클래스에 반영해야하는 경우라면 또다시 분기문을 통해 코드를 수정해야 하는 것일까? 이처럼 변화가 생길 때마다 코드를 매번 수정하는것이 맞는 것일까? This is sort of things that lead to code rot.
 
 *how can we extend this behavior while keeping the class closed from modification?* 
+
+
 
 #### Seperate extensible behavior behind an interface, and flip the dependencies
 

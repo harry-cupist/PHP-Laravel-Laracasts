@@ -91,13 +91,7 @@ $harry = new Person('harry lee');
 $harry->setAge(17); // throw Exception
 ```
 
-
-
-> Setters & Getters are behaviors associated with setting or getting particular property. 
->
-> In above case, the bahavior is that if you are younger than 18, then that's not allowed.
-
-
+> Setters & Getters are behaviors associated with setting or getting particular property.  In above case, the bahavior is that if you are younger than 18, then that's not allowed.
 
 getter도 같은 방식으로 메서드 구현 가능
 
@@ -114,7 +108,7 @@ var_dump($harry->getAge());
 
 
 
-하지만 여전히 `setAge`  메서드를 통해 18살 미만일 경우 에러를 던지는 로직을 작성하였지만 `setAge`  메서드를 거치지 않고 프로퍼티에 바로 접근하여 인스턴스에 값을 저장시킬 수 있음. 이러한 이유로 `Encapulation` 을 사용함.
+에러를 던지는 로직을 작성하였지만, 여전히 `setAge` 를 통해 18살 미만일 경우  `setAge`  를 거치지 않고 프로퍼티에 바로 접근하여 인스턴스에 값을 저장시킬 수 있음. 이러한 이유로 `Encapulation` 을 사용함.
 
 
 
@@ -127,8 +121,6 @@ var_dump($harry->getAge());
 > PHP Fatal error:  Uncaught Error: Call to private method LightSwitch::connect() from context '' in /Users/....."
 
 `protected` 도 동일하게 에러 메세지를 발생시키지만, 클래스를 extend 하여 서브클래스에서 해당 메서드를 사용 할 수 있음. 따라서, 이전 강의에서 보았듯이 `setter` 를 거치지 안혹 바로 프로퍼티에 접근하는 것을 막기 위해서는 프로퍼티를 `private` 으로 변경하면 됨.
-
-
 
 > `public` 메소드와 프로퍼티는 변경에 가장 취약합니다. 그 이유는 어떤 외부 코드가 쉽게 의존할 수 있고, 어떤 코드가 의존하고 있는지 제어할 수 없기 때문입니다. **클래스의 수정은 클래스의 모든 사용자에게 위험합니다.**
 >
@@ -201,7 +193,7 @@ class Triangle extends Shape{
 
 
 
-`Shape`  클래스의 `getArea`  메서드는 부모 클래스에 구현되어있으나, 사실상 사각형에서만 사용이 가능함(삼각형, 오각형 등에 사용 불가). 따라서 해당 프로퍼티와 매서드를 서브 클래스인 `Sqaure` 으로 옮기는 것이 더 적합함.
+`Shape@getArea` 는 부모 클래스에 구현되어있으나, 사실상 사각형에서만 사용이 가능함(삼각형, 오각형 등에 사용 불가). 따라서 해당 프로퍼티와 매서드를 서브 클래스인 `Sqaure` 으로 옮기는 것이 더 적합함.
 
 그렇다면 비어있는 `Shape` 클래스를 사용하는 이유 및 Benefit은 무엇일까? 
 
@@ -242,7 +234,7 @@ echo (new Circle)->getArea();
 
 #### 4-1. Abstract class
 
-기본 클래스인 `Shape` 의 인스턴스를 생성하는 것은 어떠한 에러도 발생시키지 않음. - `new Shape;`   또한, 일반적인 shape이 없으므로 항상 서브 클래스를 instantiate 하자고 결정내릴 수 있음(그리고 기본 클래스는 유지하고 싶지 않음). 
+기본 클래스인 `Shape` 의 인스턴스를 생성하는 것은 어떠한 에러도 발생시키지 않음.  `new Shape;`   또한, 일반적인 shape이 없으므로 항상 서브 클래스를 instantiate 하자고 결정내릴 수 있음 (그리고 기본 클래스는 유지하고 싶지 않음). 
 
 이러한 경우 `abstract` 를 사용. 추상화 클래스를 사용하면, 이 클래스의 인스턴스를 만드는 것이 불가능해짐 (에러 발생). 추상화 클래스를 사용하면 여전히 상속은 가능하면서, 기본 클래스의 인스턴스를 만드는것을 막을 수 있음. 
 

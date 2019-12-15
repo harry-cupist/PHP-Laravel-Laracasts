@@ -16,6 +16,7 @@ class ProjectsController extends Controller
         // auth()->id(); // 4
         // auth()->user(); // user
         // auth()->check(); // boolean
+
         // auth()->guest(); // guest user
 
         // select * from projects where owner_id = 4
